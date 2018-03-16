@@ -31,10 +31,13 @@ framework:
     php_errors:
         log: true
 
+
 # Twig Configuration
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+   # paths:
+      #  "%kernel.project_dir%/app/Resources/views": templates
 
 # Doctrine Configuration
 doctrine:

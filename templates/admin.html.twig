@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{{ form_start(form) }}
+    {{ form_row(form.roles) }}
+    <button type="submit">Pakeisti</button>
+{{ form_end(form) }}
+{% endblock body %}

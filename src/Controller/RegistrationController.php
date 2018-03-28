@@ -18,12 +18,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends Controller
 {
     /**
-     * @Route("/register", name="user_registration")
+     * @Route("/register/", name="user_registration")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
+
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -36,7 +37,11 @@ class RegistrationController extends Controller
 
             return $this->redirectToRoute('login');
         }
-
-        return $this->render('register.html.twig', array('form' => $form->createView()));
+var_dump($user);
+        return $this->render('Security/register.html.twig', array('form' => $form->createView()));
     }
 }
+
+
+
+//paziuret kad tokio nebutu registruojantis

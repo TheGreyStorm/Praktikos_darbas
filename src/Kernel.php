@@ -35,6 +35,12 @@ class Kernel extends BaseKernel
         }
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param LoaderInterface $loader
+     * @throws \Exception
+     */
+
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
     {
         $container->addResource(new FileResource($this->getProjectDir().'/config/bundles.php'));
@@ -50,6 +56,10 @@ class Kernel extends BaseKernel
         $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
     }
 
+    /**
+     * @param RouteCollectionBuilder $routes
+     * @throws \Symfony\Component\Config\Exception\FileLoaderLoadException
+     */
     protected function configureRoutes(RouteCollectionBuilder $routes)
     {
         $confDir = $this->getProjectDir().'/config';

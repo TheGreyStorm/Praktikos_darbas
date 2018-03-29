@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\EditUserFormType;
 use function ContainerNbSxonP\getSecurity_AuthorizationCheckerService;
+use function ContainerNbSxonP\getSecurity_TokenStorageService;
 use Couchbase\Authenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -20,8 +21,6 @@ class SecurityController extends Controller {
      */
     public function index()
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
         return $this->render('index.html.twig');
     }
     

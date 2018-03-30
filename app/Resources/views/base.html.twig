@@ -1,43 +1,32 @@
-<!doctype html>
-<html lang="en">
+{#
+   This is the base template used as the application layout which contains the
+   common elements and decorates all the other templates.
+   See https://symfony.com/doc/current/book/templating.html#template-inheritance-and-layouts
+#}
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <meta charset="UTF-8" />
 
-    <title>{% block title %}Helper{% endblock %}</title>
+    <title>{% block title %}Symfony Demo application{% endblock %}</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="icon" href="favicon.ico">
-    {% block stylesheets %}{% endblock %}
-
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
 </head>
 
-<body class="text-center">
-<form class="form-signin">
+<body>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only">Username</label>
-    <input type="username" id="username" class="form-control" placeholder="Username" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"> Remember me
-        </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-</form>
-<div class="container">
-    {% block content %}PAZIURET KAIP STILIU ISIDET{% endblock %}
+
+<div class="container body-container">
+    {% block body %}
+
+
+    {% endblock %}
 </div>
-{% block javascripts %}{% endblock %}
+
+
+
+{% block javascripts %}
+
+{% endblock %}
+
 </body>
 </html>

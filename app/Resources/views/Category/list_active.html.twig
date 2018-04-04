@@ -3,7 +3,7 @@
 <ul>
     {% for category in categories %}
     <li>
-        <a href="{{ path(category.routeName, category.routeParameters) }}">{{ category.headline|e }}</a>
+        <a href="{{ path(category.routeName, category.routeParameters) }}">{{ category.name|e }}</a>
     </li>
     {% endfor %}
 </ul>

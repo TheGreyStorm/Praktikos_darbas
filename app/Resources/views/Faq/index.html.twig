@@ -1,5 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ include('@GenjFaq/Faq/index.html.twig') }}
-{% endblock %}
+<h1>GenjFaqBundle</h1>
+<p>
+    Welcome to the GenjFaqBundle example template.
+</p>
+
+<h2>Categories</h2>
+<ul>
+    {% for category in categories %}
+                <a href="{{ path('home', { 'categorySlug': category.slug }) }}"></a>
+    {% endfor %}
+</ul>
+
+{% if selectedCategory is not null %}
+    <h2>Questions</h2>
+    <ul>
+        {% for question in questions %}
+            {% if selectedQuestion.slug is defined and selectedQuestion.slug == question.slug%}
+                <li class="active"  >
+                    <div>{{ selectedQuestion.answer }}</div>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ path('home', { 'categorySlug': selectedCategory.slug, 'questionSlug': question.slug }) }}"></a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock body %}

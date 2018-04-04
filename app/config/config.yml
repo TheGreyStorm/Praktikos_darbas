@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: doctrine_extensions.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -60,6 +61,12 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        mappings:
+            translatable:
+                type: annotation
+                alias: Gedmo
+                prefix: Gedmo\Translatable\Entity
+                dir: C:/xampp/htdocs/Helper/vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -78,3 +85,6 @@ fos_user:
     from_email:
             address: you@example.com
             sender_name: You
+genj_faq:
+    select_first_category_by_default: true
+    select_first_question_by_default: true

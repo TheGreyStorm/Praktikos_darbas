@@ -1,0 +1,8 @@
+<h2>Category {{ category.name }}</h2>
+<ul>
+    {% for question in category.sortedQuestions %}
+    <li>
+        <a href="{{ path(question.routeName, question.routeParameters) }}">{{ question.question|e }}</a>
+    </li>
+    {% endfor %}
+</ul>

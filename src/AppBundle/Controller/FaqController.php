@@ -18,50 +18,35 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FaqController extends BaseController
 {
+
     /**
-     * @Route("/faq/new")
+     * @Route("/category/")
      */
-    public function newAction()
+
+    public function listAction()
     {
-        $category = new Category();
-        $category->setName('Pirma Kategorija');
+        $categories = $this->getCategoryRepository()->retrieveAll();
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($category);
-        $em->flush();
-
-        return new Response('BAM');
+        return $this->render(
+            'Faq/index.html.twig',
+            array(
+                'categories' => $categories,
+                'selectedCategory' => null
+            )
+        );
     }
-    /**
-     * @Route("/faq/new/q")
-     */
-    public function newQuestionAction()
-    {
-        $category = $this->getCategoryRepository()->retrieveFirst();
-        $question = new Question();
-        $question->setQuestion('Pirmas Klausimas')
-            ->setAnswer('Snekam, rodom ir zjbs')
-            ->setCategory($category);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($question);
-        $em->flush();
-
-        return new Response('BAM');
-    }
-    
     /**
      *
-     * @Route ("/faq/{categorySlug}/{questionSlug}", name="home")
+     * @Route ("category/{categorySlug}/{questionSlug}", name="faq_index")
      *
      * Default index.
      * list all questions + answers show/hide can be defined in the template
      *
      * @param string $categorySlug
      * @param string $questionSlug
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundException
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function indexAction($categorySlug = null, $questionSlug = null)
     {
@@ -71,32 +56,41 @@ class FaqController extends BaseController
                 return $redirect;
             }
         }
+            /* if (!$categorySlug){
+                  $categories = $this->getCategoryRepository()->retrieveAll();
+              } else if (!$questionSlug) {
+                 $questions = $this->getSelectedCategory($categorySlug)->getQuestions();
+             } else {*/
+            // Otherwise get the selected category and/or question as usual
+            $questions = array();
+            $categories = $this->getCategoryRepository()->findAll();
+            $selectedCategory = $this->getSelectedCategory($categorySlug);
+            $selectedQuestion = $this->getSelectedQuestion($questionSlug);
+            //}
 
-        // Otherwise get the selected category and/or question as usual
-        $questions        = array();
-        $categories       = $this->getCategoryRepository()->findAll();
-        $selectedCategory = $this->getSelectedCategory($categorySlug);
-        $selectedQuestion = $this->getSelectedQuestion($questionSlug);
+            if ($selectedCategory) {
+                $questions = $selectedCategory->getQuestions();
+            }
 
-        if ($selectedCategory) {
-            $questions = $selectedCategory->getQuestions();
-        }
+            // Throw 404 if there is no category in the database
+            if (!$categories) {
+                throw $this->createNotFoundException('You need at least 1 active category in the database');
+            }
 
-        // Throw 404 if there is no category in the database
-        if (!$categories) {
-            throw $this->createNotFoundException('You need at least 1 active category in the database');
-        }
-
-        return $this->render(
-            'Faq/index.html.twig',
-            array(
-                'categories'       => $categories,
-                'questions'        => $questions,
-                'selectedCategory' => $selectedCategory,
-                'selectedQuestion' => $selectedQuestion
-            )
-        );
+            return $this->render(
+                'Faq/index.html.twig',
+                array(
+                    'categories' => $categories,
+                    'questions' => $questions,
+                    'selectedCategory' => $selectedCategory,
+                    'selectedQuestion' => $selectedQuestion
+                )
+            );
     }
+
+
+
+
 
     /**
      * Open first category or question if none was selected so far.
@@ -116,7 +110,7 @@ class FaqController extends BaseController
         if (!$categorySlug && $config['select_first_category_by_default']) {
             $firstCategory = $this->getCategoryRepository()->retrieveFirst();
             if ($firstCategory instanceof Category) {
-                $categorySlug = $firstCategory->getSlug(); //CIA
+                $categorySlug = $firstCategory->getSlug();
                 $doRedirect   = true;
             } else {
                 throw $this->createNotFoundException('Tried to open the first faq category by default, but there was none.');
@@ -135,10 +129,9 @@ class FaqController extends BaseController
 
         if ($doRedirect) {
             return $this->redirect(
-                $this->generateUrl('home', array('categorySlug' => $categorySlug, 'questionSlug' => $questionSlug), true)
+                $this->generateUrl('faq_index', array('categorySlug' => $categorySlug, 'questionSlug' => $questionSlug), true)
             );
         }
-
 
     }
 

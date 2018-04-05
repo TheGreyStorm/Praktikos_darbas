@@ -147,4 +147,9 @@ class Category
             'slug' => $this->getSlug()
         );
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

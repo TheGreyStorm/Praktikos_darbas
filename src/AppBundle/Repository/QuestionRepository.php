@@ -34,4 +34,16 @@ class QuestionRepository extends EntityRepository//BaseRepository
 
         return $query->getOneOrNullResult();
     }
+    public function retrieveByCategorySlug($categorySlug)
+    {
+        $query = $this->createQueryBuilder('q')
+            ->join('q.category','c')
+            ->where('c.slug = :categorySlug')
+            ->orderBy('q.question','ASC')
+            ->getQuery();
+
+        $query->setParameter('categorySlug', $categorySlug);
+
+        return $query->getResult();
+    }
 }

@@ -1,102 +1,122 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: giedrius.l
- * Date: 4/3/2018
- * Time: 4:27 PM
- */
 
 namespace AppBundle\Controller;
 
-
-use AppBundle\Repository\QuestionRepository;
+use AppBundle\Entity\Question;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Question controller.
+ */
 class QuestionController extends Controller
 {
     /**
-     * shows question if active
-     * @Route("/faq/{categorySlug}/{slug}", name="question")
-     * @param string $slug
+     * Creates a new question entity.
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/newquestion", name="faq_new_question")
+     * @Method({"GET", "POST"})
      */
-    public function showAction($slug)
+    public function newAction(Request $request)
     {
-        //$securityContext = $this->container->get('security.authorization_checker');
-        $question        = $this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Question')->find($slug);
+        $question = new Question();
+        $form = $this->createForm('AppBundle\Form\QuestionType', $question);
+        $form->handleRequest($request);
 
-       /* if (!$question || (!$question->isPublic() && !$securityContext->isGranted('ROLE_EDITOR'))) {
-            throw $this->createNotFoundException('question not found');
-        }*/
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($question);
+            $em->flush();
 
-        return $this->render(
-            ':Question:show.html.twig',
-            array(
-                'question' => $question
-            )
-        );
-    }
-
-
-    /**
-     * list questions which fitting the query
-     *
-     * @param string $query
-     * @param int    $max
-     * @param array  $whereFields
-     * @throws
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function listByQueryAction($query, $max = 30, $whereFields = array('headline', 'body'))
-    {
-        $questions = $this->getQuestionRepository()->retrieveByQuery($query, $max, $whereFields);
-
-        return $this->render(
-            ':Question:list_by_query.html.twig',
-            array(
-                'questions' => $questions,
-                'max'       => $max
-            )
-        );
-    }
-
-    /**
-     * @param int       $id
-     * @param \stdClass $object
-     * @param string    $style
-     * @param string    $source
-     * @param string    $headline
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
- /*   public function teaserByIdOrObjectAction($id = null, $object = null, $style = null, $source = null, $headline = null)
-    {
-        $question = $object;
-
-        if ($id !== null) {
-            $question = $this->getQuestionRepository()->findOneById($id);
+            return $this->redirectToRoute('faq_show_question', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategory()->getSlug()));
         }
 
-        return $this->render(
-            'GenjFaqBundle:Question:teaser_by_id_or_object.html.twig', array(
-                'question' => $question,
-                'style'    => $style,
-                'source'   => $source,
-                'headline' => $headline
-            )
-        );
-    }*/
+        return $this->render('question/new.html.twig', array(
+            'question' => $question,
+            'form' => $form->createView(),
+        ));
+    }
 
     /**
-     * @return QuestionRepository
+     * Finds and displays a question entity.
+     *
+     * @Route("category/{categorySlug}/{questionSlug}", name="faq_show_question")
+     * @ParamConverter("question", class="AppBundle:Question", options={"mapping" : {"questionSlug" = "slug"}})
+     * @Method("GET")
      */
-    protected function getQuestionRepository()
+    public function showAction(Question $question)
     {
-        return $this->container->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Question');
+        $deleteForm = $this->createDeleteForm($question);
+
+        return $this->render('question/show.html.twig', array(
+            'question' => $question,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing question entity.
+     *
+     * @Route("category/{categorySlug}/{questionSlug}/edit", name="faq_edit_question")
+     * @ParamConverter("question", class="AppBundle:Question", options={"mapping" : {"questionSlug" = "slug"}})
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, Question $question)
+    {
+        $deleteForm = $this->createDeleteForm($question);
+        $editForm = $this->createForm('AppBundle\Form\QuestionType', $question);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('faq_edit_question', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategory()->getSlug()));
+        }
+
+        return $this->render('question/edit.html.twig', array(
+            'categorySlug' => $question->getCategory()->getSlug(),
+            'questionSlug' => $question,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Deletes a question entity.
+     *
+     * @Route("category/{categorySlug}/{questionSlug}", name="faq_delete_question")
+     * @ParamConverter("question", class="AppBundle:Question", options={"mapping" : {"questionSlug" = "slug"}})
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Question $question)
+    {
+        $form = $this->createDeleteForm($question);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($question);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('faq_index');
+    }
+
+    /**
+     * Creates a form to delete a question entity.
+     *
+     * @param Question $question The question entity
+     *
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
+     */
+    private function createDeleteForm(Question $question)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('faq_delete_question', array('questionSlug' => $question->getSlug(),  'categorySlug' => $question->getCategory()->getSlug())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
     }
 }

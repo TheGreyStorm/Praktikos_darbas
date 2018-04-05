@@ -1,3 +1,32 @@
-<h2>{{ question.category.name }}</h2>
-<h1>{{ question.question }}</h1>
-{{ question.answer|raw }}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Question</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Question</th>
+                <td>{{ question.question }}</td>
+            </tr>
+            <tr>
+                <th>Answer</th>
+                <td>{{ question.answer }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('faq_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('faq_edit_question', {'categorySlug': question.category, 'questionSlug': question.slug }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

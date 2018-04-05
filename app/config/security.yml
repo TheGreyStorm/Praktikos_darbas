@@ -21,15 +21,18 @@ security:
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check
                 csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
-                default_target_path: home
+                default_target_path: faq_index
+                always_use_default_target_path: true
             logout:       true
             logout_on_user_change: true
-            anonymous:    true
+            anonymous:    ~
 
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register/confirmed, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: ROLE_ADMIN }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/faq, role: ROLE_USER }
+        - { path: ^/, role: ROLE_USER }
+

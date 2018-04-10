@@ -26,6 +26,7 @@ class Question
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="questions")
      * @ORM\OrderBy({"name" = "desc"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     protected $category;
 

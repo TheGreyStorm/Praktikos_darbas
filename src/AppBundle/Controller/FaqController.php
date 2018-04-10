@@ -19,11 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class FaqController extends BaseController
 {
 
-    /**
-     * @Route("/category/")
+   /* /**
+     * @Route("/{slug}", defaults={"slug" = "category"})
      */
 
-    public function listAction()
+   /* public function listAction()
     {
         $categories = $this->getCategoryRepository()->retrieveAll();
 
@@ -34,10 +34,10 @@ class FaqController extends BaseController
                 'selectedCategory' => null
             )
         );
-    }
+    }*/
     /**
-     *
-     * @Route ("category/{categorySlug}/{questionSlug}", name="faq_index")
+     * @Route ("/")
+     * @Route ("/category/", name="faq_index")
      *
      * Default index.
      * list all questions + answers show/hide can be defined in the template
@@ -50,7 +50,7 @@ class FaqController extends BaseController
      */
     public function indexAction($categorySlug = null, $questionSlug = null)
     {
-        if (!$categorySlug || !$questionSlug) {
+        /*if (!$categorySlug || !$questionSlug) {
             $redirect = $this->generateRedirectToDefaultSelection($categorySlug, $questionSlug);
             if ($redirect) {
                 return $redirect;

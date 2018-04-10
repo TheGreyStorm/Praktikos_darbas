@@ -33,3 +33,15 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    app.redirect_after_registration_subscriber:
+        class: AppBundle\Listener\RedirectAfterRegistrationSubscriber
+        autowire: true
+        tags:
+            - { name: kernel.event_subscriber }
+
+
+    app.authentication_skipper_subscriber:
+        class: AppBundle\Listener\AuthenticationSkipperSubscriber
+        tags:
+            - { name: kernel.event_subscriber }

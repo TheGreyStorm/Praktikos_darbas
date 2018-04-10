@@ -15,11 +15,11 @@
             </tr>
         </tbody>
     </table>
-
     <ul>
         <li>
             <a href="{{ path('faq_index') }}">Back to the list</a>
         </li>
+        {% if is_granted('ROLE_MANAGER') %}
         <li>
             <a href="{{ path('faq_edit_question', {'categorySlug': question.category, 'questionSlug': question.slug }) }}">Edit</a>
         </li>
@@ -28,5 +28,6 @@
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
+        {% endif %}
     </ul>
 {% endblock %}

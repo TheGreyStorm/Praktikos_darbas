@@ -1,47 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Category</h1>
+    <h1>{{ category.name }}</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
-            <tr>
+
                 {% for question in questions %}
-                    <td>
-                    {{ question.question }}
-                    </td>
-                    <td>
-                        {{ question.answer }}
-                    </td>
+                    <div>
+                    <a href="{{ path('faq_show_question', {'categorySlug': category.slug, 'questionSlug': question.slug}) }}">{{ question.question }}</a>
+                    </div>
                 {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-
-    <table>
-        <tbody>
-
-        </tbody>
-    </table>
 
     <ul>
         <li>
             <a href="{{ path('faq_index') }}">Back to the list</a>
         </li>
+        {% if is_granted('ROLE_MANAGER') %}
         <li>
             <a href="{{ path('faq_edit', { 'categorySlug': category.slug }) }}">Edit</a>
         </li>
         <li>
             <a href="{{ path('faq_new_question') }}">New question</a>
         </li>
+
         <li>
             {{ form_start(delete_form) }}
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
+        {% endif %}
     </ul>
 {% endblock %}

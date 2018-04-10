@@ -8,7 +8,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     firewalls:
         dev:
@@ -23,8 +23,10 @@ security:
                 csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
                 default_target_path: faq_index
                 always_use_default_target_path: true
-            logout:       true
-            logout_on_user_change: true
+            logout:
+                path: /logout/
+                target: /login/
+            logout_on_user_change: false
             anonymous:    ~
 
 

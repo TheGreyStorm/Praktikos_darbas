@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>User {{ user.email }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin') }}">Back to the list</a>
+        </li>
+
+        {#<li>
+            <a href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
+        </li>#}
+    </ul>
+    <label>Role</label>
+<ul>
+    {% for role in user.roles %}
+        <li>
+            {{ role }}
+        </li>
+    {% endfor %}
+</ul>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+{% endblock %}

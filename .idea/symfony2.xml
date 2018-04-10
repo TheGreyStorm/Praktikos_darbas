@@ -3,6 +3,14 @@
   <component name="Symfony2PluginSettings">
     <option name="pathToTranslation" value="var/cache/dev/translations" />
     <option name="pluginEnabled" value="true" />
+    <option name="profilerCsvPath" value="" />
     <option name="lastServiceGeneratorLanguage" value="yaml" />
+    <option name="containerFiles">
+      <list>
+        <container_file path="app/cache/dev/appDevDebugProjectContainer.xml" />
+        <container_file path="var/cache/dev/appDevDebugProjectContainer.xml" />
+        <container_file path="var/cache/dev/srcDevDebugProjectContainer.xml" />
+      </list>
+    </option>
   </component>
 </project>

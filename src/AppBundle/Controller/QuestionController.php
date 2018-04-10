@@ -72,7 +72,7 @@ class QuestionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('faq_edit_question', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategory()->getSlug()));
+            return $this->redirectToRoute('faq_show_question', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategory()->getSlug()));
         }
 
         return $this->render('question/edit.html.twig', array(

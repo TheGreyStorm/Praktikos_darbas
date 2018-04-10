@@ -52,7 +52,6 @@ class CategoryController extends Controller
         $deleteForm = $this->createDeleteForm($category);
         $categorySlug = $category->getSlug();
         $questions = $this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Question')->retrieveByCategorySlug($categorySlug);
-//print_r($categorySlug);
         return $this->render('category/show.html.twig', array(
             'questions' => $questions,
             'category' => $category,

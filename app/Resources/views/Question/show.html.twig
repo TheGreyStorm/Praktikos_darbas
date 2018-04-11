@@ -19,6 +19,9 @@
         <li>
             <a href="{{ path('faq_index') }}">Back to the list</a>
         </li>
+        <li>
+            <a href="{{ path('faq_show', { 'categorySlug':question.category })}}">Back to category</a>
+        </li>
         {% if is_granted('ROLE_MANAGER') %}
         <li>
             <a href="{{ path('faq_edit_question', {'categorySlug': question.category, 'questionSlug': question.slug }) }}">Edit</a>

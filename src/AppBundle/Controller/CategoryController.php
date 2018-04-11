@@ -75,7 +75,7 @@ class CategoryController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('faq_edit', array('categorySlug' => $category->getSlug()));
+            return $this->redirectToRoute('faq_show', array('categorySlug' => $category->getSlug()));
         }
 
         return $this->render('category/edit.html.twig', array(

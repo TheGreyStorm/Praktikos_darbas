@@ -2,14 +2,10 @@
 
 {% block body %}
     <h1>User edit</h1>
-{{ dump(user) }}
    {{ form_start(editUserForm) }}
         {{ form_widget(editUserForm) }}
+    <input type="submit" value="Save">
     {{ form_end(editUserForm) }}
-
-{#  {{ form_start(edit_form) }}
-     {{ form_widget(edit_form) }}
- {{ form_end(edit_form) }} #}
 
  <ul>
      <li>

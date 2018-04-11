@@ -27,13 +27,10 @@ class UserType extends AbstractType
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
                 array(
                     'multiple' => true,
+                    'expanded' => false,
                     'label' => 'Choose the role',
                     'choices' => $permissions,
                 )
-            )
-            ->add(
-                'save',
-                'Symfony\Component\Form\Extension\Core\Type\SubmitType'
             );
     }
 

@@ -45,3 +45,8 @@ services:
         class: AppBundle\Listener\AuthenticationSkipperSubscriber
         tags:
             - { name: kernel.event_subscriber }
+
+    twig.extension.sortbyfield:
+        class: Snilius\Twig\SortByFieldExtension
+        tags:
+            - { name: twig.extension }

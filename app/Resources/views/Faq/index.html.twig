@@ -7,11 +7,11 @@
 </p>
 
 <h2>Categories</h2>
-
+{% if is_granted('ROLE_MANAGER') %}
     <a href="{{ path('faq_new') }}">Nauja kategorija</a><br>
-
+{% endif %}
 <ul>
-    {% for category in categories %}
+    {% for category in categories|sortbyfield('name') %}
         <li>
 
             <a href="{{ path('faq_show', {'categorySlug': category.slug}) }}">{{ category.name }}</a>

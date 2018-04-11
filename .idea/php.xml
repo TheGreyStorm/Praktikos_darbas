@@ -48,6 +48,7 @@
       <path value="$PROJECT_DIR$/vendor/sensio/generator-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/profiler-pack" />
       <path value="$PROJECT_DIR$/vendor/genj/faq-bundle" />
+      <path value="$PROJECT_DIR$/vendor/snilius/twig-sort-by-field" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />

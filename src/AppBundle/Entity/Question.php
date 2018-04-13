@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Question
@@ -78,7 +79,7 @@ class Question
 
     /**
      * Get name.
-     *
+     * @Groups({"elastica"})
      * @return string
      */
     public function getQuestion()
@@ -102,7 +103,7 @@ class Question
 
     /**
      * Get slug.
-     *
+     * @Groups({"elastica"})
      * @return string
      */
     public function getSlug()
@@ -126,7 +127,7 @@ class Question
 
     /**
      * Get body.
-     *
+     * @Groups({"elastica"})
      * @return string
      */
     public function getAnswer()
@@ -135,6 +136,7 @@ class Question
     }
 
     /**
+     * @Groups({"elastica"})
      * @return Category
      */
     public function getCategory()

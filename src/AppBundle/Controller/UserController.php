@@ -44,7 +44,7 @@ class UserController extends Controller
     }
 
     /**
-     * Finds and displays a category entity.
+     * Finds and displays a user entity.
      *
      * @Route("/admin/{id}", name="user_show")
      * @Method("GET")

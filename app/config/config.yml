@@ -19,7 +19,7 @@ framework:
     form: ~
     csrf_protection: ~
     validation: { enable_annotations: true }
-    #serializer: { enable_annotations: true }
+    serializer: { enabled: true, enable_annotations: true }
     default_locale: '%locale%'
     trusted_hosts: ~
     session:
@@ -37,6 +37,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        searchBar: '@app.searchbarservice'
    # paths:
       #  "%kernel.project_dir%/app/Resources/views": templates
 
@@ -88,3 +90,26 @@ fos_user:
 genj_faq:
     select_first_category_by_default: true
     select_first_question_by_default: true
+
+fos_elastica:
+    serializer: ~
+    clients:
+        defaults: { host: localhost, port: 9200}
+    indexes:
+        app:
+            index_name: app_%kernel.environment%
+            types:
+                question:
+                    persistence:
+                        finder: ~
+                        driver: orm
+                        model: AppBundle\Entity\Search
+                        provider: ~
+                        listener: ~
+                        repository: AppBundle\Repository\SearchRepository
+                    serializer:
+                        groups: [elastica]
+                    _parent:
+                        type: category
+                        property: category
+                        identifier: id

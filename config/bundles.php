@@ -10,4 +10,6 @@ return [
     Sensio\Bundle\DistributionBundle\SensioDistributionBundle::class => ['all' => true],
     Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle::class => ['all' => true],
     Genj\FaqBundle\GenjFaqBundle::class => ['all' => true],
+    FOS\ElasticaBundle\FOSElasticaBundle::class => ['all' => true],
+    Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
 ];

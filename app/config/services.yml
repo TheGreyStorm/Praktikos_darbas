@@ -50,3 +50,7 @@ services:
         class: Snilius\Twig\SortByFieldExtension
         tags:
             - { name: twig.extension }
+
+    app.searchbarservice:
+        class: AppBundle\Services\SearchBarService
+        arguments: ['@form.factory', '@router']

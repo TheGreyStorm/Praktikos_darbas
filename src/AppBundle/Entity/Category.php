@@ -7,22 +7,25 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+ *
  */
 class Category
 {
+
     /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     *
+
      */
     private $id;
 
@@ -48,7 +51,7 @@ class Category
 
     /**
      * Get id.
-     *
+     * @Groups({"elastica"})
      * @return int
      */
     public function getId()
@@ -72,7 +75,7 @@ class Category
 
     /**
      * Get name.
-     *
+     * @Groups({"elastica"})
      * @return string
      */
     public function getName()
@@ -96,7 +99,7 @@ class Category
 
     /**
      * Get slug.
-     *
+     * @Groups({"elastica"})
      * @return string
      */
    public function getSlug()
@@ -106,7 +109,7 @@ class Category
 
     /**
      * Get questions
-     *
+     * @Groups({"elastica"})
      * @return Collection
      */
     public function getQuestions()

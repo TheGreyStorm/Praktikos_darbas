@@ -22,7 +22,7 @@ class Search
     protected $category;
 
     /**
-     *
+     * @Groups({"elastica"})
      * @return mixed
      */
     public function getQuestion()
@@ -39,7 +39,7 @@ class Search
     }
 
     /**
-     *
+     *@Groups({"elastica"})v
      * @return mixed
      */
     public function getSlug()
@@ -56,7 +56,7 @@ class Search
     }
 
     /**
-     *
+     *@Groups({"elastica"})
      * @return mixed
      */
     public function getAnswer()
@@ -73,7 +73,7 @@ class Search
     }
 
     /**
-     *
+     *@Groups({"elastica"})
      * @return mixed
      */
     public function getCategory()

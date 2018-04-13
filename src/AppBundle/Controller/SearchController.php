@@ -26,19 +26,27 @@ class SearchController extends Controller
      */
     public function searchAction(Request $request)
     {
+        dump($request);
         $search = new Search();
 
-        $form = $this->createForm(SearchType::class, $search);
-        $form->handleRequest($request);
+        $searchBar = $this->createForm(SearchType::class, $search);
+        $searchBar->handleRequest($request);
 
-        $search = $form->getData();
+
+         /*   if ($request->isMethod('POST')) {
+        $searchBar->submit($request->request->get('search'));
+    }*/
+
+        $search = $searchBar->getData();
 
         $elasticaManager = $this->get('fos_elastica.manager');
         $repository = $elasticaManager->getRepository(Search::class);
         $results = $repository->search($search);
 
         return $this->render('Faq/search.html.twig', array(
+            'request' =>$request,
             'result' => $results,
+            'form' => $search
         ));
     }
 }

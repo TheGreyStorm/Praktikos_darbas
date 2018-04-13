@@ -26,11 +26,11 @@ class SearchBarService
 
     public function searchBar()
     {
-        $form = $this->formFactory->createBuilder()
+        $searchBar = $this->formFactory->createBuilder()
             ->setAction($this->router->generate('search_results'))
             ->add('search', SearchType::class)
             ->getForm();
 
-        return $form->createView();
+        return $searchBar->createView();
     }
 }

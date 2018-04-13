@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {{ dump(request) }}
 {{ dump(result) }}
-    {% for question in result %}
+    {{ dump(form) }}
+   {# {% for question in result %}
         {{ question.question }}
-    {% endfor %}
+    {% endfor %}#}
 {% endblock %}

@@ -54,3 +54,9 @@ services:
     app.searchbarservice:
         class: AppBundle\Services\SearchBarService
         arguments: ['@form.factory', '@router']
+
+    app.form.searchtype:
+        class: AppBundle\Form\SearchType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }

@@ -28,6 +28,7 @@
         "gedmo/doctrine-extensions": "^2.3",
         "genj/faq-bundle": "dev-master",
         "incenteev/composer-parameter-handler": "^2.0",
+        "jordanlev/twig-tree-tag": "^1.0",
         "knplabs/knp-paginator-bundle": "^2.7",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.0",

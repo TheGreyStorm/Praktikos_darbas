@@ -4,13 +4,24 @@
     <h2>Categories</h2>
 <div id="categories">
     <div id="leftPane">
-        <ul id="categoryList">
-            {% for category in categories|sortbyfield('name') %}
-              {#  <li>
-                    <a href="{{ path('faq_show', {'categorySlug': category.slug}) }}">{{ category.name }}</a>
-                </li>#}
-                <li>
+        {% tree category in categories %}
+        {% if treeloop.first %}<ul id="categoryList">{% endif %}
+            <li>
+                {{ category.name }}
+                {% subtree category.questions %}
+            </li>
+            {% if treeloop.last %}</ul>{% endif %}
+        {% endtree %}
+           {# {% for category in categories|sortbyfield('name') %}
+                <li data-slug="{{ category.slug }}">
                     {{ category.name }}
+                   {# <ul>
+                        {% for question in category %}
+                            <li>
+                                {{ question.question }}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </li>
             {% endfor %}
         </ul>
@@ -30,7 +41,8 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-        {% endif %}
+        {% endif %}#}
+
     </div>
     <div id="rightPane">
 
@@ -42,7 +54,7 @@
 
     <script>
         $(document).ready(function () {
-            
+
 
             var splitter = $('#categories').height(600).split({
                 orientation: 'vertical',
@@ -53,8 +65,11 @@
                 }
             });
 
-            $('#categoryList').click(function () {
-                {#kaip pasiimt category slug ir parodyt ji desinej pusej#}
+           // var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+            $('#categoryList li').on('click', function () {
+                var categorySlug = $(this).data('slug');
+                //console.log(categorySlug);
+                $('#rightPane').load('http://helper/category/'+categorySlug);
             });
 
         });

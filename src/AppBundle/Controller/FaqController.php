@@ -35,6 +35,7 @@ class FaqController extends BaseController
             )
         );
     }*/
+
     /**
      * @Route ("/")
      * @Route ("/category/", name="faq_index")

@@ -34,17 +34,17 @@ class Category
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
-    private $name;
+    private $categoryName;
 
     /**
      *
-     * @Gedmo\Slug(fields={"name"})
+     * @Gedmo\Slug(fields={"categoryName"})
      * @ORM\Column(length=255, unique=true)
      */
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="Question", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="categoryName")
      */
     protected $questions;
 
@@ -62,13 +62,13 @@ class Category
     /**
      * Set name.
      *
-     * @param string $name
+     * @param string $categoryName
      *
      * @return Category
      */
-    public function setName($name)
+    public function setCategoryName($categoryName)
     {
-        $this->name = $name;
+        $this->categoryName = $categoryName;
 
         return $this;
     }
@@ -78,9 +78,9 @@ class Category
      * @Groups({"elastica"})
      * @return string
      */
-    public function getName()
+    public function getCategoryName()
     {
-        return $this->name;
+        return $this->categoryName;
     }
 
     /**
@@ -92,7 +92,7 @@ class Category
      */
     public function setSlug($slug)
     {
-        $this->name = $slug;
+        $this->categoryName = $slug;
 
         return $this;
     }
@@ -153,6 +153,6 @@ class Category
 
     public function __toString()
     {
-        return $this->name;
+        return $this->categoryName;
     }
 }

@@ -24,7 +24,7 @@ class QuestionRepository extends EntityRepository//BaseRepository
     public function retrieveFirstByCategorySlug($categorySlug)
     {
         $query = $this->createQueryBuilder('q')
-            ->join('q.category','c')
+            ->join('q.categoryName','c')
             ->where('c.slug = :categorySlug')
             ->orderBy('q.question','ASC')
             ->setMaxResults(1)
@@ -37,7 +37,7 @@ class QuestionRepository extends EntityRepository//BaseRepository
     public function retrieveByCategorySlug($categorySlug)
     {
         $query = $this->createQueryBuilder('q')
-            ->join('q.category','c')
+            ->join('q.categoryName','c')
             ->where('c.slug = :categorySlug')
             ->orderBy('q.question','ASC')
             ->getQuery();

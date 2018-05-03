@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Genj\FaqBundle\GenjFaqBundle(),
             new \FOS\ElasticaBundle\FOSElasticaBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
            // new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         ];
 

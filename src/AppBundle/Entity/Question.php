@@ -29,7 +29,7 @@ class Question
      * @ORM\OrderBy({"name" = "desc"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    protected $category;
+    protected $categoryName;
 
     /**
      * @var string
@@ -139,19 +139,19 @@ class Question
      * @Groups({"elastica"})
      * @return Category
      */
-    public function getCategory()
+    public function getCategoryName()
     {
-        return $this->category;
+        return $this->categoryName;
     }
 
     /**
-     * @param Category $category
+     * @param Category $categoryName
      *
      * @return Question
      */
-    public function setCategory(Category $category)
+    public function setCategoryName(Category $categoryName)
     {
-        $this->category = $category;
+        $this->categoryName = $categoryName;
 
         return $this;
     }

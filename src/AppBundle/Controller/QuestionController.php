@@ -30,7 +30,7 @@ class QuestionController extends Controller
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('faq_show_question', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategory()->getSlug()));
+            return $this->redirectToRoute('faq_show_question', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategoryName()->getSlug()));
         }
 
         return $this->render('question/new.html.twig', array(
@@ -72,11 +72,11 @@ class QuestionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('faq_show_question', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategory()->getSlug()));
+            return $this->redirectToRoute('faq_show_question', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategoryName()->getSlug()));
         }
 
         return $this->render('question/edit.html.twig', array(
-            'categorySlug' => $question->getCategory()->getSlug(),
+            'categorySlug' => $question->getCategoryName()->getSlug(),
             'questionSlug' => $question,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -114,7 +114,7 @@ class QuestionController extends Controller
     private function createDeleteForm(Question $question)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('faq_delete_question', array('questionSlug' => $question->getSlug(),  'categorySlug' => $question->getCategory()->getSlug())))
+            ->setAction($this->generateUrl('faq_delete_question', array('questionSlug' => $question->getSlug(),  'categorySlug' => $question->getCategoryName()->getSlug())))
             ->setMethod('DELETE')
             ->getForm()
         ;

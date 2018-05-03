@@ -1,21 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    {% macro medis(categories, questions) %}
+
+        {% for category in categories %}
+            <li data-cslug="{{ category.slug }}">
+               {{ category.categoryName }}
+               {% if category.questions %}
+                    <ul id="questionList">
+                        {% for question in questions %}
+                            <li data-qslug="{{ question.slug }}">
+                            {{ question.question }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    {% endmacro %}
+
+
+    {% import _self as macros %}
     <h2>Categories</h2>
 <div id="categories">
     <div id="leftPane">
-        {% tree category in categories %}
-        {% if treeloop.first %}<ul id="categoryList">{% endif %}
-            <li>
-                {{ category.name }}
-                {% subtree category.questions %}
-            </li>
-            {% if treeloop.last %}</ul>{% endif %}
-        {% endtree %}
-           {# {% for category in categories|sortbyfield('name') %}
+        <ul id="categoryList">
+            {{ macros.medis(categories, questions) }}
+        </ul>
+       {# <ul id="categoryList">
+            {% for category in categories|sortbyfield('name') %}
                 <li data-slug="{{ category.slug }}">
                     {{ category.name }}
-                   {# <ul>
+                    <ul>
                         {% for question in category %}
                             <li>
                                 {{ question.question }}
@@ -52,8 +69,20 @@
 
 {% block javascripts %}
 
+  {#  <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>#}
+
     <script>
+        //const routes = require('/web/js/fos_js_routes.json');
+        //var Routing = require('/vendor/friendsofsymfony/jsrouting-bundle/Resources/js/router');
+        import Routing from '/vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
         $(document).ready(function () {
+
+
+
+            Routing.setRoutingData(routes);
+            Routing.generate('rep_log_list');
+
 
 
             var splitter = $('#categories').height(600).split({
@@ -65,12 +94,17 @@
                 }
             });
 
-           // var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
-            $('#categoryList li').on('click', function () {
-                var categorySlug = $(this).data('slug');
-                //console.log(categorySlug);
-                $('#rightPane').load('http://helper/category/'+categorySlug);
-            });
+            var categorySlug = $(this).data('cslug');
+            var questionSlug = $(this).data('qslug');
+
+            Routing.generate('faq_show', {'categorySlug': categorySlug});
+
+            $('#categoryList li')
+                .on('click',
+                    function () {// console.log(questionSlug);
+                    $('#leftPane').load('http://helper/category/'+categorySlug);
+                       // $('#questionList li').load('http://helper/category/'+categorySlug+questionSlug);
+                });
 
         });
     </script>

@@ -1,7 +1,14 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+hidden_routes:
+    path: /admin
+    options:
+        expose: false
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
-
+    options:
+        expose: true
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 #genj_faq:

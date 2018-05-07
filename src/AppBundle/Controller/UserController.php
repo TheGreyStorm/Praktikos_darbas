@@ -80,7 +80,6 @@ class UserController extends Controller
             $editUser = $this->getDoctrine()->getRepository('AppBundle:User')->find($selectedUser);
             $userManager = $this->container->get('fos_user.user_manager');
             $user = $userManager->findUserByUsername($editUser->getUsername());
-            //$user->setRoles(array($selectedUser['roles']));
             $userManager->updateUser($user);
         }
 

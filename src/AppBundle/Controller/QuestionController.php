@@ -30,7 +30,7 @@ class QuestionController extends Controller
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('faq_show_question', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategoryName()->getSlug()));
+            return $this->redirectToRoute('faq_index', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategoryName()->getSlug()));
         }
 
         return $this->render('question/new.html.twig', array(
@@ -72,7 +72,7 @@ class QuestionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('faq_show_question', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategoryName()->getSlug()));
+            return $this->redirectToRoute('faq_index', array('questionSlug' => $question->getSlug(), 'categorySlug' => $question->getCategoryName()->getSlug()));
         }
 
         return $this->render('question/edit.html.twig', array(

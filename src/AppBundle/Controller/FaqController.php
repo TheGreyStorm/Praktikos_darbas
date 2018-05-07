@@ -18,24 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FaqController extends BaseController
 {
-
-   /* /**
-     * @Route("/{slug}", defaults={"slug" = "category"})
-     */
-
-   /* public function listAction()
-    {
-        $categories = $this->getCategoryRepository()->retrieveAll();
-
-        return $this->render(
-            'Faq/index.html.twig',
-            array(
-                'categories' => $categories,
-                'selectedCategory' => null
-            )
-        );
-    }*/
-
     /**
      * @Route ("/")
      * @Route ("/category/", name="faq_index")

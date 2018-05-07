@@ -2,20 +2,31 @@
 
 {% block body %}
     <h1>{{ category.categoryName }}</h1>
+    <div id="questions">
+    <ul id="questionList">
         {% for question in questions|sortbyfield('question') %}
-            <div>
-                <a href="{{ path('faq_show_question', {'categorySlug': category.slug, 'questionSlug': question.slug}) }}">{{ question.question }}</a>
-            </div>
-        {% endfor %}
+                {#<a href="{{ path('faq_show_question', {'categorySlug': category.slug, 'questionSlug': question.slug}) }}">{{ question.question }}</a>#}
+              <li data-slug="{{ question.Slug }}" data-category-slug="{{ question.categoryName.slug }}">
+                  {{ question.question }}
+              </li>
 
-    <ul>
+        {% endfor %}
+        {% if is_granted('ROLE_MANAGER') %}
+            <a href="{{ path('faq_edit', { 'categorySlug': category.slug }) }}">Edit</a>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        {% endif %}
+    </ul>
+
+    </div>
+    <div id="answers">
+    </div>
+ {#   <ul>
         <li>
             <a href="{{ path('faq_index') }}">Back to the list</a>
         </li>
-        {% if is_granted('ROLE_MANAGER') %}
-        <li>
-            <a href="{{ path('faq_edit', { 'categorySlug': category.slug }) }}">Edit</a>
-        </li>
+
         <li>
             <a href="{{ path('faq_new_question') }}">New question</a>
         </li>
@@ -26,5 +37,23 @@
             {{ form_end(delete_form) }}
         </li>
         {% endif %}
-    </ul>
+    </ul>#}
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $('#questions').height(300).split({
+            orientation: 'horizontal',
+            limit: 100,
+            position: '50%',
+            percent: true
+
+        });
+        $('#questionList li').on('click', function(){
+            var categorySlug = $(this).data('category-slug');
+            var questionSlug = $(this).data('slug');
+            $('#answers').load('http://helper/category/'+categorySlug+'/'+questionSlug);
+        });
+    </script>
 {% endblock %}

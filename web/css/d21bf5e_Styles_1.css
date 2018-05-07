@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    color: cyan;
+}
+
+h1{
+    color: cyan;
+}
+#questionList li:hover{
+    color: red;
+}
+
+ul li:active{
+    color: mediumblue;
+}
+
+table{
+    table-layout: fixed;
+}
+
+td{
+    max-width: 450px;
+    word-wrap: break-word;
+}
+
+#lenta{
+    color: cyan;
+}

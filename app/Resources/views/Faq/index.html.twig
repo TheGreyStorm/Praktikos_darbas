@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    {% macro medis(categories, questions) %}
+{#{% macro medis(categories, questions) %}
 
         {% for category in categories %}
             <li data-cslug="{{ category.slug }}">
@@ -22,33 +22,25 @@
 
 
     {% import _self as macros %}
+    <ul id="categoryList">
+        {{ macros.medis(categories, questions) }}
+    </ul>#}
     <h2>Categories</h2>
 <div id="categories">
     <div id="leftPane">
         <ul id="categoryList">
-            {{ macros.medis(categories, questions) }}
-        </ul>
-       {# <ul id="categoryList">
-            {% for category in categories|sortbyfield('name') %}
+            {% for category in categories|sortbyfield('categoryName') %}
                 <li data-slug="{{ category.slug }}">
-                    {{ category.name }}
-                    <ul>
-                        {% for question in category %}
-                            <li>
-                                {{ question.question }}
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    {{ category.categoryName }}
                 </li>
             {% endfor %}
         </ul>
 
-        {% if selectedCategory is not null %}
-            <h2>Questions</h2>
-            <ul>
+       {# {% if selectedCategory is not null %}
+            <ul id="questionList">
                 {% for question in questions %}
                     {% if selectedQuestion.slug is defined and selectedQuestion.slug == question.slug%}
-                        <li class="active"  >
+                        <li class="active">
                             <div>{{ selectedQuestion.answer }}</div>
                         </li>
                     {% else %}
@@ -61,49 +53,40 @@
         {% endif %}#}
 
     </div>
-    <div id="rightPane">
+
+    <div id="middlePane">
 
     </div>
+
 </div>
+
 {% endblock body %}
+
 
 {% block javascripts %}
 
-  {#  <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
-    <script type="text/javascript" src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>#}
-
     <script>
-        //const routes = require('/web/js/fos_js_routes.json');
-        //var Routing = require('/vendor/friendsofsymfony/jsrouting-bundle/Resources/js/router');
-        import Routing from '/vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+
         $(document).ready(function () {
-
-
-
-            Routing.setRoutingData(routes);
-            Routing.generate('rep_log_list');
-
-
 
             var splitter = $('#categories').height(600).split({
                 orientation: 'vertical',
                 limit: 200,
                 position: '20%',
-                onDrag: function (event) {
-                    console.log(splitter.position);
-                }
+                percent: true
             });
 
-            var categorySlug = $(this).data('cslug');
-            var questionSlug = $(this).data('qslug');
 
-            Routing.generate('faq_show', {'categorySlug': categorySlug});
+
+
+
+            //console.log(categorySlug,questionSlug);
 
             $('#categoryList li')
                 .on('click',
-                    function () {// console.log(questionSlug);
-                    $('#leftPane').load('http://helper/category/'+categorySlug);
-                       // $('#questionList li').load('http://helper/category/'+categorySlug+questionSlug);
+                    function () {
+                        var categorySlug = $(this).data('slug');
+                    $('#middlePane').load('http://helper/category/'+categorySlug);
                 });
 
         });

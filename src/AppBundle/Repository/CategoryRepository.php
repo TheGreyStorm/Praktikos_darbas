@@ -24,7 +24,7 @@ class CategoryRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('c')
             ->where('c.slug = :slug')
-            ->orderBy('c.name','ASC')
+            ->orderBy('c.categoryName','ASC')
             ->getQuery();
 
         $query->setParameter('slug',$slug);

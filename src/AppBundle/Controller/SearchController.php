@@ -26,7 +26,7 @@ class SearchController extends Controller
      */
     public function searchAction(Request $request)
     {
-        dump($request);
+
         $search = new Search();
 
         $searchBar = $this->createForm(SearchType::class, $search);

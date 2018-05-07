@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>{% block title %}Symfony Demo application{% endblock %}</title>
+    <title>{% block title %}D.U.K{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
@@ -38,15 +38,13 @@
             <li>
                 <a class="nav-link" href="{{ path('fos_user_security_logout') }}">Atsijungti <span class="sr-only">(current)</span></a>
             </li>
-            <li>
             {% if is_granted('ROLE_MANAGER') %}
                 <a class="nav-link" href="{{ path('faq_new') }}">Nauja kategorija</a><br>
+
+                <a class="nav-link" href="{{ path('faq_new_question') }}">Naujas Klausimas <span class="sr-only">(current)</span></a>
+
             {% endif %}
-            </li>
-           {# <li>
-                <a class="nav-link" href="{{ path('#') }}">Naujas Klausimas <span class="sr-only">(current)</span></a>
-            </li>
-            <li>
+            {#<li>
                 <a class="nav-link" href="{{ path('#') }}">Nauja Kategorija <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
@@ -57,7 +55,7 @@
             </li>#}
         </ul>
 
-        {{ form(searchBar.searchBar) }}
+       {# {{ form(searchBar.searchBar) }}#}
 
     </div>
 </nav>
@@ -75,7 +73,8 @@
 
 
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+{% endblock %}
 
 </body>
 </html>

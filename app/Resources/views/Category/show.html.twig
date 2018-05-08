@@ -1,20 +1,19 @@
 {% extends 'main.html.twig' %}
 
 {% block body %}
-    <h1>{{ category.categoryName }}</h1>
+    <h1 id="categoryName">{{ category.categoryName }}</h1>
     <div id="questions">
     <ul id="questionList">
         {% for question in questions|sortbyfield('question') %}
-                {#<a href="{{ path('faq_show_question', {'categorySlug': category.slug, 'questionSlug': question.slug}) }}">{{ question.question }}</a>#}
               <li data-slug="{{ question.Slug }}" data-category-slug="{{ question.categoryName.slug }}">
                   {{ question.question }}
               </li>
 
         {% endfor %}
         {% if is_granted('ROLE_MANAGER') %}
-            <a href="{{ path('faq_edit', { 'categorySlug': category.slug }) }}">Edit</a>
+            <a class="btn btn-info" style="margin-top: 10px" href="{{ path('faq_edit', { 'categorySlug': category.slug }) }}">Redaguoti</a>
             {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
+            <input type="submit" value="Trinti" class="btn btn-danger" style="margin-top: 10px" >
             {{ form_end(delete_form) }}
         {% endif %}
     </ul>
@@ -22,22 +21,7 @@
     </div>
     <div id="answers">
     </div>
- {#   <ul>
-        <li>
-            <a href="{{ path('faq_index') }}">Back to the list</a>
-        </li>
 
-        <li>
-            <a href="{{ path('faq_new_question') }}">New question</a>
-        </li>
-
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-        {% endif %}
-    </ul>#}
 {% endblock %}
 
 {% block javascripts %}
@@ -45,8 +29,8 @@
     <script>
         $('#questions').height(300).split({
             orientation: 'horizontal',
-            limit: 100,
-            position: '50%',
+            limit: 0,
+            position: '100%',
             percent: true
 
         });

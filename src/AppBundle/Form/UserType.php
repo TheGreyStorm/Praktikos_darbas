@@ -14,21 +14,21 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
        $permissions = array(
-           'User' => 'ROLE_USER',
-           'Manager' => 'ROLE_MANAGER',
-           'Admin' => 'ROLE_ADMIN'
+           'Paprastas vartotojas' => 'ROLE_USER',
+           'Vadybininkas' => 'ROLE_MANAGER',
+           'Administratorius' => 'ROLE_ADMIN'
        );
 
         $builder
-            ->add('email')
-            ->add('username')
+            ->add('email',null, array('label'=>'El. paštas'))
+            ->add('username', null, array('label'=>'Vartotojo vardas'))
             ->add(
                 'roles',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
                 array(
                     'multiple' => true,
-                    'expanded' => false,
-                    'label' => 'Choose the role',
+                    'expanded' => true,
+                    'label' => 'Parinkti visas tinkančias roles:',
                     'choices' => $permissions,
                 )
             );

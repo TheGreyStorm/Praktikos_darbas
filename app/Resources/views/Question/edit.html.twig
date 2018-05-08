@@ -1,21 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Question edit</h1>
+    <h1>Redaguoti klausimą</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input style="margin-top: 10px" type="submit" value="Redaguoti" class="btn btn-success" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('faq_index') }}">Back to the list</a>
-        </li>
-        <li>
+            <a class="btn btn-primary" style="margin-top: 10px; margin-bottom: 10px" href="{{ path('faq_index') }}">Atgal į kategorijų sąrašą</a>
+
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Trinti" class="btn btn-danger">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
 {% endblock %}

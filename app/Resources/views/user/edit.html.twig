@@ -1,20 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User edit</h1>
+    <h1>Vartotojo redagavimas</h1>
    {{ form_start(editUserForm) }}
         {{ form_widget(editUserForm) }}
-    <input type="submit" value="Save">
+    <input  class="btn btn-success"  style="margin-top: 10px" type="submit" value="Išsaugoti">
     {{ form_end(editUserForm) }}
 
- <ul>
-     <li>
-         <a href="{{ path('admin') }}">Back to the list</a>
-     </li>
-     <li>
+         <a  class="btn btn-primary"  style="margin-top: 10px" href="{{ path('admin') }}">Atgal į sąrašą</a>
+
          {{ form_start(delete_form) }}
-             <input type="submit" value="Delete">
+             <input  class="btn btn-danger"  style="margin-top: 10px" type="submit" value="Trinti">
          {{ form_end(delete_form) }}
-     </li>
- </ul>
+
 {% endblock %}

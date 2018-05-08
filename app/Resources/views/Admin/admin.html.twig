@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('fos_user_registration_register') }}">Create new user</a>
-<ul>
+
+    <div>
+    <a style="margin-left:30px" href="{{ path('fos_user_registration_register') }}">Kurti naują vartotoją</a>
+
+<ul style="margin: 20px">
     {% for user in users|sortbyfield('email') %}
         <li>
             <a href="{{ path('user_edit', {'id':user.id}) }}">{{ user.email }}</a>
         </li>
     {% endfor %}
 </ul>
-
+    </div>
 
 
 {% endblock %}

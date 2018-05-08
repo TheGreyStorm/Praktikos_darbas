@@ -1,8 +1,10 @@
 <!doctype HTML>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block stylesheets %}
-        {% stylesheets 'bundles/app/Styles.css' filter='cssrewrite' %}
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+        {% stylesheets '@AppBundle/Resources/Public/Styles.css' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
     {% endblock %}

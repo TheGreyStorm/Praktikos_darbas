@@ -13,6 +13,9 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     {% block stylesheets %}
         <link href="https://unpkg.com/jquery.splitter/css/jquery.splitter.css" rel="stylesheet">
+        {% stylesheets '@AppBundle/Resources/Public/Styles.css' filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 
@@ -35,15 +38,16 @@
                 <a class="nav-link" href="{{ path('admin')}}">Admin <span class="sr-only">(current)</span></a>
             </li>
             {% endif %}
-            <li>
-                <a class="nav-link" href="{{ path('fos_user_security_logout') }}">Atsijungti <span class="sr-only">(current)</span></a>
-            </li>
+
             {% if is_granted('ROLE_MANAGER') %}
                 <a class="nav-link" href="{{ path('faq_new') }}">Nauja kategorija</a><br>
 
                 <a class="nav-link" href="{{ path('faq_new_question') }}">Naujas Klausimas <span class="sr-only">(current)</span></a>
 
             {% endif %}
+            <li>
+                <a class="nav-link navbar-right" href="{{ path('fos_user_security_logout') }}">Atsijungti <span class="sr-only">(current)</span></a>
+            </li>
             {#<li>
                 <a class="nav-link" href="{{ path('#') }}">Nauja Kategorija <span class="sr-only">(current)</span></a>
             </li>
@@ -60,7 +64,7 @@
     </div>
 </nav>
 {% endif %}
-<main role="main" class="container">
+<main role="main" class="container-fluid" >
     <div class="row">
         <div class="col-md-12">
             {% block body %}{% endblock %}
@@ -70,7 +74,8 @@
 
 <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script src="https://unpkg.com/jquery.splitter/js/jquery.splitter.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
 {% block javascripts %}

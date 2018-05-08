@@ -2,33 +2,19 @@
 
 {% block body %}
 
-    <table id="lenta">
-        <tbody>
-            <tr>
-                <th>Question</th>
-                <td>{{ question.question }}</td>
-            </tr>
-            <tr>
-                <th>Answer</th>
-                <td>{{ question.answer }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h1 id="questionName">{{ question.question }}</h1>
+    <div id="selectedAnswer">
+        {{ question.answer }}
 
-       {# <li>
-            <a href="{{ path('faq_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('faq_show', { 'categorySlug':question.categoryName.slug })}}">Back to category</a>
-        </li>#}
+        <br>
         {% if is_granted('ROLE_MANAGER') %}
 
-            <a href="{{ path('faq_edit_question', {'categorySlug': question.categoryName, 'questionSlug': question.slug }) }}">Edit</a>
+            <a class="btn btn-info"  style="margin-top: 10px" href="{{ path('faq_edit_question', {'categorySlug': question.categoryName, 'questionSlug': question.slug }) }}">Redaguoti</a>
 
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Trinti" class="btn btn-danger"  style="margin-top: 10px">
             {{ form_end(delete_form) }}
 
         {% endif %}
-
+    </div>
 {% endblock %}

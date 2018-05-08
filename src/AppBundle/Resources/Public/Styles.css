@@ -1,8 +1,19 @@
-table{
-    table-layout: fixed;
+#questionList{
+    padding-left: 50px;
 }
 
-td{
-    max-width: 450px;
-    word-wrap: break-word;
+#questionName{
+    padding-left: 50px;
+    margin: 0;
+}
+
+#selectedAnswer{
+    max-width: 100%;
+    color: red;
+    word-wrap: break-spaces;
+    padding-left: 50px;
+}
+
+#categoryName{
+    padding-left: 50px;
 }

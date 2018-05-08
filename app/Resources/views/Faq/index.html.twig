@@ -2,30 +2,7 @@
 
 {% block body %}
 
-{#{% macro medis(categories, questions) %}
-
-        {% for category in categories %}
-            <li data-cslug="{{ category.slug }}">
-               {{ category.categoryName }}
-               {% if category.questions %}
-                    <ul id="questionList">
-                        {% for question in questions %}
-                            <li data-qslug="{{ question.slug }}">
-                            {{ question.question }}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </li>
-        {% endfor %}
-    {% endmacro %}
-
-
-    {% import _self as macros %}
-    <ul id="categoryList">
-        {{ macros.medis(categories, questions) }}
-    </ul>#}
-    <h2>Categories</h2>
+    <h2>Kategorijos</h2>
 <div id="categories">
     <div id="leftPane">
         <ul id="categoryList">
@@ -54,14 +31,11 @@
 
     </div>
 
-    <div id="middlePane">
-
-    </div>
+    <div id="middlePane"></div>
 
 </div>
 
 {% endblock body %}
-
 
 {% block javascripts %}
 
@@ -69,18 +43,12 @@
 
         $(document).ready(function () {
 
-            var splitter = $('#categories').height(600).split({
+            var splitter = $('#categories').height(840).split({
                 orientation: 'vertical',
                 limit: 200,
                 position: '20%',
                 percent: true
             });
-
-
-
-
-
-            //console.log(categorySlug,questionSlug);
 
             $('#categoryList li')
                 .on('click',

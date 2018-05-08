@@ -13,7 +13,10 @@ class QuestionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('question')->add('answer')->add('categoryName');
+        $builder
+            ->add('question', null, array('label'=>'Klausimas'))
+            ->add('answer', null, array('label'=>'Atsakymas'))
+            ->add('categoryName',null, array('label'=> 'Kategorija'));
     }/**
      * {@inheritdoc}
      */

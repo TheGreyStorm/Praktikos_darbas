@@ -3,12 +3,12 @@
 {% block body %}
 
     <div>
-    <a style="margin-left:30px" href="{{ path('fos_user_registration_register') }}">Kurti naują vartotoją</a>
+    <a class="btn btn-lg btn-primary" style="margin-left:30px" href="{{ path('fos_user_registration_register') }}">Kurti naują vartotoją</a>
 
 <ul style="margin: 20px">
     {% for user in users|sortbyfield('email') %}
         <li>
-            <a href="{{ path('user_edit', {'id':user.id}) }}">{{ user.email }}</a>
+            <a class="btn" href="{{ path('user_edit', {'id':user.id}) }}">{{ user.email }}</a>
         </li>
     {% endfor %}
 </ul>

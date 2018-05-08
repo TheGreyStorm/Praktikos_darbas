@@ -17,3 +17,17 @@
 #categoryName{
     padding-left: 50px;
 }
+
+#fos_user_registration_form_email{
+    margin-left: 101px;
+}
+
+#fos_user_registration_form_username{
+    margin-left: 49px;
+}
+#fos_user_registration_form_plainPassword_first{
+    margin-left: 84px;
+}
+#fos_user_registration_form_plainPassword_second{
+    margin-left: 10px;
+}

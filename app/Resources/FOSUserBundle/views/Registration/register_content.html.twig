@@ -1,9 +1,14 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<form class="form-horizontal">
+
     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_row(form.email, {'label': 'El. Paštas'}) }}
+        {{ form_row(form.username, {'label': 'Vartotojo vardas'}) }}
+        {{ form_row(form.plainPassword.first, {'label': 'Slaptažodis'}) }}
+        {{ form_row(form.plainPassword.second, {'label': 'Pakartokite slaptažodį'}) }}
         {{ form_widget(form) }}
     <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+        <input class="btn-success" style="margin-top: 10px" type="submit" value="Registruoti" />
     </div>
     {{ form_end(form) }}
-</form>
+
+<a class="btn btn-primary" style="margin-top: 10px" href="{{ path('admin') }}">Atgal į sąrašą</a>

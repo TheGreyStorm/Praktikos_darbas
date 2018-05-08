@@ -39,8 +39,7 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-    globals:
-        searchBar: '@app.searchbarservice'
+
    # paths:
       #  "%kernel.project_dir%/app/Resources/views": templates
 

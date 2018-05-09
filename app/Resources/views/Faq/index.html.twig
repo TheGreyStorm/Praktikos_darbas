@@ -2,10 +2,10 @@
 
 {% block body %}
 
-    <h2>Kategorijos</h2>
+    <h2 class="default">Kategorijos</h2>
 <div id="categories">
     <div id="leftPane">
-        <ul id="categoryList">
+        <ul id="categoryList" class="default">
             {% for category in categories|sortbyfield('categoryName') %}
                 <li data-slug="{{ category.slug }}">
                     {{ category.categoryName }}

@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class QuestionType extends AbstractType
 {
@@ -16,8 +17,15 @@ class QuestionType extends AbstractType
         $builder
             ->add('question', null, array('label'=>'Klausimas'))
             ->add('answer', null, array('label'=>'Atsakymas'))
-            ->add('categoryName',null, array('label'=> 'Kategorija'));
-    }/**
+            ->add('categoryName',null, array('label'=> 'Kategorija'))
+          /* ->add('imageFile', VichImageType::class, array(
+                'allow_delete'=>false,
+                'download_uri'=>false,
+                'required'=>false
+            ))*/;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

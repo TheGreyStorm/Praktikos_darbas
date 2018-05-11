@@ -46,6 +46,7 @@ class CategoryController extends Controller
      * @Route("/category/{categorySlug}", name="faq_show")
      * @ParamConverter("category", class="AppBundle:Category", options={"mapping" : {"categorySlug" = "slug"}})
      * @Method("GET")
+     * @throws \Doctrine\ORM\ORMException
      */
     public function showAction(Category $category)
     {

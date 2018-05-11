@@ -97,3 +97,13 @@ assetic:
     use_controller: '%kernel.debug%'
     filters:
         cssrewrite: ~
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        images:
+            uri_prefix: /images
+            upload_destination: '%kernel.project_dir%/web/images'
+
+            delete_on_update: false

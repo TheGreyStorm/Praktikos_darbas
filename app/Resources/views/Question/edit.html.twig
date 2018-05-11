@@ -2,10 +2,9 @@
 
 {% block body %}
     <h1>Redaguoti klausimą</h1>
-
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input style="margin-top: 10px" type="submit" value="Redaguoti" class="btn btn-success" />
+        <input style="margin-top: 10px" type="submit" value="Išsaugoti" class="btn btn-success" />
     {{ form_end(edit_form) }}
 
             <a class="btn btn-primary" style="margin-top: 10px; margin-bottom: 10px" href="{{ path('faq_index') }}">Atgal į kategorijų sąrašą</a>

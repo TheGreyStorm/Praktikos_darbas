@@ -3,7 +3,7 @@
 {% block body %}
     <h1 class="default" id="categoryName">{{ category.categoryName }}</h1>
     <div id="questions">
-    <ul id="questionList" class="default">
+    <ul id="questionList" class="pointer">
         {% for question in questions|sortbyfield('question') %}
               <li data-slug="{{ question.Slug }}" data-category-slug="{{ question.categoryName.slug }}">
                   {{ question.question }}

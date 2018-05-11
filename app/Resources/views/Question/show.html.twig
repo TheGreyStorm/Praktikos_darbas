@@ -3,9 +3,9 @@
 {% block body %}
 
     <h1 class="default" id="questionName">{{ question.question }}</h1>
-    <div id="selectedAnswer" class="default">
+    <div id="selectedAnswer" class="pointer">
         {{ question.answer }}
-
+      {#  <img src="{{ vich_uploader_asset(question, 'imageFile', 'AppBundle\\Entity\\Question') }}"/>#}
         <br>
         {% if is_granted('ROLE_MANAGER') %}
 

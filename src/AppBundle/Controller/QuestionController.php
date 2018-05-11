@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Vich\UploaderBundle\Entity\File;
 
 /**
  * Question controller.
@@ -45,9 +46,11 @@ class QuestionController extends Controller
      * @Route("category/{categorySlug}/{questionSlug}", name="faq_show_question")
      * @ParamConverter("question", class="AppBundle:Question", options={"mapping" : {"questionSlug" = "slug"}})
      * @Method("GET")
+     * @throws \Exception
      */
     public function showAction(Question $question)
     {
+
         $deleteForm = $this->createDeleteForm($question);
 
         return $this->render('question/show.html.twig', array(

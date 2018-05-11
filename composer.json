@@ -39,7 +39,8 @@
         "symfony/swiftmailer-bundle": "^3.1",
         "symfony/symfony": "^3.0",
         "symfony/templating": "^4.0",
-        "twig/twig": "^1.0"
+        "twig/twig": "^1.0",
+        "vich/uploader-bundle": "^1.8"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^3.0"

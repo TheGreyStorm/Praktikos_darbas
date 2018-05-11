@@ -4,7 +4,7 @@
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post" class="col-md-2 col-md-offset-4">
+<form action="{{ path("fos_user_security_check") }}" method="post" class="col-md-1">
     {% if csrf_token %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
     {% endif %}
@@ -17,5 +17,6 @@
 
     <input class="btn btn-success" style="margin-top: 10px" type="submit" id="_submit" name="_submit" value="Prisijungti" />
 
+    {#atkomentuoti jeigu reikia login puslapi leist vartotojam patiem registruotis#}
    {# <a href="{{ path('fos_user_registration_register') }}">Register</a>#}
 </form>

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Genj\FaqBundle\GenjFaqBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

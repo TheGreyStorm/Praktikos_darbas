@@ -5,7 +5,7 @@
     <h2 class="default">Kategorijos</h2>
 <div id="categories">
     <div id="leftPane">
-        <ul id="categoryList" class="default">
+        <ul id="categoryList" class="pointer">
             {% for category in categories|sortbyfield('categoryName') %}
                 <li data-slug="{{ category.slug }}">
                     {{ category.categoryName }}

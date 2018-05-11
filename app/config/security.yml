@@ -7,8 +7,8 @@ security:
         ROLE_ADMIN: ROLE_MANAGER
 
     providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username_email
+      fos_userbundle:
+          id: fos_user.user_provider.username_email
 
     firewalls:
         dev:

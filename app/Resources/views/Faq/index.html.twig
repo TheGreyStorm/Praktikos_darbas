@@ -13,7 +13,7 @@
             {% endfor %}
         </ul>
 
-       {# {% if selectedCategory is not null %}
+        {% if selectedCategory is not null %}
             <ul id="questionList">
                 {% for question in questions %}
                     {% if selectedQuestion.slug is defined and selectedQuestion.slug == question.slug%}
@@ -27,7 +27,7 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-        {% endif %}#}
+        {% endif %}
 
     </div>
 

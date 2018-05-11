@@ -57,7 +57,8 @@ class FaqController extends BaseController
 
             // Throw 404 if there is no category in the database
             if (!$categories) {
-                throw $this->createNotFoundException('You need at least 1 active category in the database');
+               // throw $this->createNotFoundException('You need at least 1 active category in the database');
+                $this->redirectToRoute('faq_new');
             }
 
             return $this->render(

@@ -31,24 +31,24 @@ class Question
      * @ORM\Column(type="string", length=255)
      * @var string
      */
-    private $imageName;
+  // private $imageName;
     /**
      * @Vich\UploadableField(mapping="images", fileNameProperty="imageName", size="imageSize")
      * @var File
      */
-    private $imageFile;
+ //   private $imageFile;
 
     /**
      * @ORM\Column(type="integer")
      * @var integer
      */
-    private $imageSize;
+ //   private $imageSize;
 
     /**
      * @ORM\Column(type="datetime")
      * @var \DateTime
      */
-    private $updatedAt;
+//    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="questions")
@@ -93,7 +93,7 @@ class Question
      * @param File|UploadedFile $imageName
      * @throws \Exception
      */
-    public function setImageFile(?File $imageName = null): void
+  /*  public function setImageFile(?File $imageName = null): void
     {
         $this->imageFile = $imageName;
 
@@ -126,7 +126,7 @@ class Question
     {
         return $this->imageSize;
     }
-
+*/
     /**
      * Set name.
      *
